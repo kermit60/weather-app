@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+  </head>
+  <body>
+    <div id="header">
+        <h2 id="heading">Weather</h2>
+        <div id="input-div">
+            <input type="text">
+            <button id="search-button">Search</button>
+        </div>
+        <button id="temp-toggle">
+            <p>C/F</p>
+        </button>
+    </div>
+    
+    <div id="main-temp">
+        <div id="main-container">
+            <div id="today-temp">
+                <p id="city">Markham</p>
+                <p id="temp-description">Clouds</p>
+                <div id="current-temp">20°</div>
+                <div>
+                    <p id="curr-high">H:29°</p>
+                    <p id="curr-low">L:15°</p>
+                </div>
+            </div>
+            <div id="temp-display">
+                <div class="display-item">
+                    <div class="display-time">Now</div>
+                    <div class="display-rain">17%</div>
+                    <img class="display-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt="">
+                    <div class="display-temp">22°</div>
+                </div>
+                <div class="display-item">
+                    <div class="display-time">Now</div>
+                    <div class="display-rain">17%</div>
+                    <img class="display-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt="">
+                    <div class="display-temp">22°</div>
+                </div>
+                <div class="display-item">
+                    <div class="display-time">Now</div>
+                    <div class="display-rain">17%</div>
+                    <img class="display-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt="">
+                    <div class="display-temp">22°</div>
+                </div>
+                <div class="display-item">
+                    <div class="display-time">Now</div>
+                    <div class="display-rain">17%</div>
+                    <img class="display-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt="">
+                    <div class="display-temp">22°</div>
+                </div>
+                <div class="display-item">
+                    <div class="display-time">Now</div>
+                    <div class="display-rain">17%</div>
+                    <img class="display-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt="">
+                    <div class="display-temp">22°</div>
+                </div>
+            </div>
+        </div>
+        <div id="description">
+            Today: scattered clouds. The high will be 29
+        </div>
+    </div>
+    <div id="additional-temp">
+        <div class="add-temp-item">
+            <p>SUNRISE</p>
+            <div id="sunrise">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>SUNSET</p>
+            <div id="sunset">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>CHANCE OF RAIN</p>
+            <div id="rain-chance">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>HUMIDITY</p>
+            <div id="humidity">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>WIND</p>
+            <div id="wind">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>FEELS LIKE</p>
+            <div id="feels-like">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>PRECIPITATION</p>
+            <div id="precipitation">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>PRESSURE</p>
+            <div id="pressure">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>VISIBILITY</p>
+            <div id="visibility">
+                06:08
+            </div>
+        </div>
+        <div class="add-temp-item">
+            <p>UV INDEX</p>
+            <div id="uv-index">
+                06:08
+            </div>
+        </div>  
+       
+    </div>
+    <!-- 8 rows and 5 columns -->
+    <div id="week-temp">
+        <div id="week-header">
+            <p>DAY</p>
+            <p></p>
+            <p>CHANCE OF RAIN</p>
+            <p>HUMIDITY</p>
+            <p>TEMPERATURE</p>
+        </div>
+        <div id="week-temp-list">
+            <div class="week-temp-item">
+                <div class="week-day">Thursday</div>
+                <div><img class="week-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt=""></div>
+                <div class="week-chance">0%</div>
+                <div class="week-humidity">60%</div>
+                <div class="week-temperature">25° 15°</div>
+            </div>
+            <div class="week-temp-item">
+                <div class="week-day">Thursday</div>
+                <div><img class="week-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt=""></div>
+                <div class="week-chance">0%</div>
+                <div class="week-humidity">60%</div>
+                <div class="week-temperature">25° 15°</div>
+            </div>
+            <div class="week-temp-item">
+                <div class="week-day">Thursday</div>
+                <div><img class="week-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt=""></div>
+                <div class="week-chance">0%</div>
+                <div class="week-humidity">60%</div>
+                <div class="week-temperature">25° 15°</div>
+            </div>
+            <div class="week-temp-item">
+                <div class="week-day">Thursday</div>
+                <div><img class="week-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt=""></div>
+                <div class="week-chance">0%</div>
+                <div class="week-humidity">60%</div>
+                <div class="week-temperature">25° 15°</div>
+            </div>
+            <div class="week-temp-item">
+                <div class="week-day">Thursday</div>
+                <div><img class="week-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt=""></div>
+                <div class="week-chance">0%</div>
+                <div class="week-humidity">60%</div>
+                <div class="week-temperature">25° 15°</div>
+            </div>
+            <div class="week-temp-item">
+                <div class="week-day">Thursday</div>
+                <div><img class="week-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt=""></div>
+                <div class="week-chance">0%</div>
+                <div class="week-humidity">60%</div>
+                <div class="week-temperature">25° 15°</div>
+            </div>
+            <div class="week-temp-item">
+                <div class="week-day">Thursday</div>
+                <div><img class="week-img" src="https://openweathermap.org/img/wn/10d@2x.png" alt=""></div>
+                <div class="week-chance">0%</div>
+                <div class="week-humidity">60%</div>
+                <div class="week-temperature">25° 15°</div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
