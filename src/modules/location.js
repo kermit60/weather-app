@@ -31,7 +31,7 @@ const location = (() => {
     const city = targetLocation.resolvedAddress.split(', ')[0];
     const today = targetLocation.days[0];
     const condition = today.conditions;
-    const currentTemp = today.temp;
+    const currentTemp = targetLocation.currentConditions.temp;
     const high = today.tempmax;
     const low = today.tempmin;
 
@@ -45,7 +45,16 @@ const location = (() => {
   }
 
   const getDisplayInfo = () => {
-    
+    const array = [];
+    const displayArray = targetLocation.days[0].hours;
+    displayArray.forEach(element => {
+      const dateTime = element.datetime.substring(0, 5);
+      const chanceOfRain = `${element.precipprob}%`;
+      const icon = element.icon;
+      const temp = `${element.temp}°`;
+      array.push({dateTime, chanceOfRain, icon, temp});
+    })
+    return array;
   }
 
   const getAdditionalTempInfo = () => {
@@ -53,7 +62,7 @@ const location = (() => {
     const sunrise = today.sunrise.substring(0, 5);
     const sunset = today.sunset.substring(0, 5);
     const chanceOfRain = `${today.precipprob}%`;
-    const humidity = `${today.humidity}%`;
+    const humidity = `${Math.round(today.humidity)}%`;
     const wind = `${today.windspeed} km/hr`;
     const feelslike =`${today.feelslike}°`;
     const precip = `${today.precip} mL`;
@@ -75,11 +84,43 @@ const location = (() => {
     }
   }
 
+  const getWeekInfo = (city) => {
+    const infoArray = [];
+    const weekdays = {
+      0: 'Sunday',
+      1: 'Monday',
+      2: 'Tuesday',
+      3: 'Wednesday',
+      4: 'Thursday',
+      5: 'Friday',
+      6: 'Saturday',
+    }
+    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next8days?key=NZL55SGLRPM9G77WWV7GLSNPP&unitGroup=metric`)
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        console.log(response);
+        response.days.splice(2).forEach(day => {
+          const weekDay = weekdays[(new Date(day.datetime)).getDay()];
+          const icon = day.icon;
+          const chanceOfRain = `${day.precipprob}%`;
+          const humidity = `${Math.round(day.humidity)}%`;
+          const temp = `${Math.round(day.tempmax)}° ${Math.round(day.tempmin)}°`;
+          infoArray.push({weekDay, icon, chanceOfRain, humidity, temp});
+        })
+      })
+      .catch(error => console.log(error));
+    return infoArray;
+  }
+
   return {
     getLocation,
     getDescription,
     getTodaysTemp,
     getAdditionalTempInfo,
+    getDisplayInfo,
+    getWeekInfo,
     formatDate
   }
 })();
