@@ -1,13 +1,14 @@
 import './styles.css';
 import location from './modules/location';
+import dom from './modules/dom';
 
-location.getLocation('vancouver');
+location.getLocation('markham');
 setTimeout(() => {
-  console.log(location.getDescription());
-  console.log(location.getTodaysTemp());
-  console.log(location.getAdditionalTempInfo());
-  console.log(location.getDisplayInfo());
-  console.log(location.getWeekInfo('vancouver'));
+  dom.changeDescription(location.getDescription());
+  dom.changeTodaysTemp(location.getTodaysTemp());
+  dom.changeAdditionalInfo(location.getAdditionalTempInfo());
+  dom.createHourDisplay(location.getDisplayInfo());
+  console.log(location.getWeekInfo('canada'));
 }, 500);
 console.log('RENDERING WORKS');
 console.log(new Date());

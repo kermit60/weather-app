@@ -25,15 +25,15 @@ const location = (() => {
     }
   }
 
-  const getDescription = () => targetLocation.days[0].description;
+  const getDescription = () => `Today: ${targetLocation.days[0].description}. The high will be ${Math.round(targetLocation.days[0].tempmax)}°. The low will be ${Math.round(targetLocation.days[0].tempmin)}°`;
 
   const getTodaysTemp = () => {
     const city = targetLocation.resolvedAddress.split(', ')[0];
     const today = targetLocation.days[0];
     const condition = today.conditions;
-    const currentTemp = targetLocation.currentConditions.temp;
-    const high = today.tempmax;
-    const low = today.tempmin;
+    const currentTemp = `${Math.round(targetLocation.currentConditions.temp)}°`;
+    const high = `H:${Math.round(today.tempmax)}°`;
+    const low = `L:${Math.round(today.tempmin)}°`;
 
     return {
       city,
@@ -47,6 +47,12 @@ const location = (() => {
   const getDisplayInfo = () => {
     const array = [];
     const displayArray = targetLocation.days[0].hours;
+    array.push({
+      dateTime: 'Now',
+      chanceOfRain: `${targetLocation.currentConditions.precipprob}%`,
+      icon: targetLocation.currentConditions.icon,
+      temp: `${targetLocation.currentConditions.temp}°`
+    })
     displayArray.forEach(element => {
       const dateTime = element.datetime.substring(0, 5);
       const chanceOfRain = `${element.precipprob}%`;
@@ -65,7 +71,7 @@ const location = (() => {
     const humidity = `${Math.round(today.humidity)}%`;
     const wind = `${today.windspeed} km/hr`;
     const feelslike =`${today.feelslike}°`;
-    const precip = `${today.precip} mL`;
+    const precip = `${Math.round(today.precip)} mL`;
     const pressure = `${String(today.pressure).split('.')[0]} hPa`
     const visibility = `${today.visibility} km`;
     const uvIndex = today.uvindex;

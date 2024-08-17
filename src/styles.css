@@ -115,8 +115,10 @@ color: #6c757d;
 }
 
 .add-temp-item > div {
+  text-align: center;
   font-size: 15px;
   font-weight: 300;
+  min-width: 75px;
 }
 
 #week-temp {
