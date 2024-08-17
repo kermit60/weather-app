@@ -142,14 +142,14 @@ const dom = (() => {
     });
   }
 
-  const createPage = (city) => {
+  const createPage = (city, units) => {
     location.getLocation(city);
-    const array = location.getWeekInfo(city);
+    const array = location.getWeekInfo(city, units);
     setTimeout(() => {
       changeDescription(location.getDescription());
-      changeTodaysTemp(location.getTodaysTemp());
+      changeTodaysTemp(location.getTodaysTemp(units));
       changeAdditionalInfo(location.getAdditionalTempInfo());
-      createHourDisplay(location.getDisplayInfo());
+      createHourDisplay(location.getDisplayInfo(units));
       createWeekDisplay(array);
     }, 500);
   }
@@ -161,6 +161,22 @@ const dom = (() => {
     }, 3000);
   }
 
+  // CELSIUS is true FAHRENHAIT is false
+  const changeUnit = (() => { 
+    let unit = true;
+
+    const changeUnitOfMeasure = () => {
+      unit = !unit;
+    }
+
+    const getUnitOfMeasure = () => unit;
+
+    return {
+      changeUnitOfMeasure,
+      getUnitOfMeasure
+    }
+  })();
+
   return {
     changeTodaysTemp,
     changeDescription,
@@ -170,7 +186,8 @@ const dom = (() => {
     createWeekItem,
     createWeekDisplay,
     createPage,
-    displayErrorMessage
+    displayErrorMessage,
+    changeUnit
   }
 })();
 

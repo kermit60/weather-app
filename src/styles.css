@@ -13,6 +13,11 @@ button {
   background-color: white;
 }
 
+.selected {
+  color: rgb(38, 38, 254);
+  font-weight: 600;
+}
+
 #header {
   height: 90px;
   display: flex;
@@ -54,12 +59,15 @@ form {
 }
 
 #temp-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   border: none;
   min-height: 26px;
   min-width: 75px;
   border-radius: 3px;
-  
+  background-color: white;
 }
 
 #error-message {

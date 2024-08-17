@@ -15,28 +15,32 @@ const location = (() => {
     return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
   };
 
+  const getPlace = () => targetLocation.address;
+
   const getLocation = async (city) => {
     try {
       // fetching the city's information                                                                                            
       const cityFetch = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${formatDate()}?key=NZL55SGLRPM9G77WWV7GLSNPP&unitGroup=metric`)
       const cityInfo = await cityFetch.json();
       targetLocation = cityInfo
-      console.log(targetLocation);
+      console.log('Current Location', targetLocation.resolvedAddress);
     } catch (error) {
       dom.displayErrorMessage(city);
       console.log(`The city/country ${city} doesn't exist`);
+      console.log('Current location', targetLocation.resolvedAddress);
     }
   }
 
   const getDescription = () => `Today: ${targetLocation.days[0].description}`;
 
-  const getTodaysTemp = () => {
+  const getTodaysTemp = (units) => {
     const city = targetLocation.resolvedAddress.split(', ')[0];
     const today = targetLocation.days[0];
     const condition = today.conditions;
-    const currentTemp = `${Math.round(targetLocation.currentConditions ? targetLocation.currentConditions.temp : targetLocation.days[0].temp)}°`;
-    const high = `H:${Math.round(today.tempmax)}°`;
-    const low = `L:${Math.round(today.tempmin)}°`;
+    const currentTemp = `${Math.round(targetLocation.currentConditions ? (units ? targetLocation.currentConditions.temp : (targetLocation.currentConditions.temp * 9/5) + 32 )
+                                                                       : (units ? targetLocation.days[0].temp : (targetLocation.days[0].temp * 9/5) + 32))}°`;
+    const high = `H:${units ? Math.round(today.tempmax) : Math.round((today.tempmax * 9/5) + 32)}°`;
+    const low = `L:${units ? Math.round(today.tempmin) : Math.round((today.tempmin * 9/5) + 32)}°`;
 
     return {
       city,
@@ -47,20 +51,21 @@ const location = (() => {
     }
   }
 
-  const getDisplayInfo = () => {
+  const getDisplayInfo = (units) => {
     const array = [];
     const displayArray = targetLocation.days[0].hours;
     array.push({
       dateTime: 'Now',
       chanceOfRain: `${targetLocation.currentConditions ? targetLocation.currentConditions.precipprob : targetLocation.days[0].precipprob}%`,
       icon: targetLocation.currentConditions ? targetLocation.currentConditions.icon : targetLocation.days[0].icon,
-      temp: `${targetLocation.currentConditions ? targetLocation.currentConditions.temp : targetLocation.days[0].temp}°`
+      temp: `${targetLocation.currentConditions ? (units ? Math.round(targetLocation.currentConditions.temp) : Math.round((targetLocation.currentConditions.temp * 9/5) + 32)) 
+                                                : (units ? Math.round(targetLocation.days[0].temp) : Math.round((targetLocation.days[0].temp * 9/5) + 32))}°`
     })
     displayArray.forEach(element => {
       const dateTime = element.datetime.substring(0, 5);
       const chanceOfRain = `${element.precipprob}%`;
       const icon = element.icon;
-      const temp = `${element.temp}°`;
+      const temp = `${units ? Math.round(element.temp) : Math.round((element.temp * 9/5) + 32)}°`;
       array.push({dateTime, chanceOfRain, icon, temp});
     })
     return array;
@@ -93,7 +98,7 @@ const location = (() => {
     }
   }
 
-  const getWeekInfo = (city) => {
+  const getWeekInfo = (city, units) => {
     const infoArray = [];
     const weekdays = {
       0: 'Sunday',
@@ -104,6 +109,7 @@ const location = (() => {
       5: 'Friday',
       6: 'Saturday',
     }
+    
     fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next8days?key=NZL55SGLRPM9G77WWV7GLSNPP&unitGroup=metric`)
       .then(response => {
         return response.json();
@@ -115,7 +121,7 @@ const location = (() => {
           const icon = day.icon;
           const chanceOfRain = `${day.precipprob}%`;
           const humidity = `${Math.round(day.humidity)}%`;
-          const temp = `${Math.round(day.tempmax)}° ${Math.round(day.tempmin)}°`;
+          const temp = `${units ? Math.round(day.tempmax) : Math.round((day.tempmax * 9/5) + 32)}° ${units ? Math.round(day.tempmin) : Math.round((day.tempmin * 9/5) + 32)}°`;
           infoArray.push({weekDay, icon, chanceOfRain, humidity, temp});
         })
       })
@@ -134,7 +140,8 @@ const location = (() => {
     getAdditionalTempInfo,
     getDisplayInfo,
     getWeekInfo,
-    formatDate
+    formatDate,
+    getPlace
   }
 })();
 
