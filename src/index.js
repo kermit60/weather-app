@@ -8,7 +8,12 @@ setTimeout(() => {
   dom.changeTodaysTemp(location.getTodaysTemp());
   dom.changeAdditionalInfo(location.getAdditionalTempInfo());
   dom.createHourDisplay(location.getDisplayInfo());
-  console.log(location.getWeekInfo('canada'));
+  dom.createWeekDisplay(location.getWeekInfo('markham'));
 }, 500);
+
+const array = location.getWeekInfo('markham');
+setTimeout(() => {
+  dom.createWeekDisplay(array);
+}, 500);
+
 console.log('RENDERING WORKS');
-console.log(new Date());

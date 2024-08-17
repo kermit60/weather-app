@@ -25,7 +25,7 @@ const location = (() => {
     }
   }
 
-  const getDescription = () => `Today: ${targetLocation.days[0].description}. The high will be ${Math.round(targetLocation.days[0].tempmax)}°. The low will be ${Math.round(targetLocation.days[0].tempmin)}°`;
+  const getDescription = () => `Today: ${targetLocation.days[0].description}`;
 
   const getTodaysTemp = () => {
     const city = targetLocation.resolvedAddress.split(', ')[0];
@@ -117,6 +117,7 @@ const location = (() => {
         })
       })
       .catch(error => console.log(error));
+    console.log(infoArray);
     return infoArray;
   }
 

@@ -74,8 +74,6 @@ const dom = (() => {
 
     displayTime.textContent = info.dateTime;
     displayRain.textContent = info.chanceOfRain;
-    console.log('ICON', info.icon);
-    console.log('IMG', iconSetIdentifier[info.icon]);
     icon.src = `https://openweathermap.org/img/wn/${iconSetIdentifier[info.icon]}@2x.png`;
     temp.textContent = info.temp;
 
@@ -95,12 +93,56 @@ const dom = (() => {
     })
   }
 
+  const createWeekItem = (weekInfo) => {
+    const weekItem = document.createElement('div');
+    const weekDay = document.createElement('div');
+    const imgContainer = document.createElement('div');
+    const icon = new Image();
+    const rainChance = document.createElement('div');
+    const humidity = document.createElement('div');
+    const temperature = document.createElement('div');
+
+    weekItem.classList.add('week-temp-item');
+    weekDay.classList.add('week-day');
+    icon.classList.add('week-img');
+    rainChance.classList.add('week-chance');
+    humidity.classList.add("week-humidity");
+    temperature.classList.add("week-temperature");
+
+    // weekDay, icon, chanceOfRain, humidity, temp
+    weekDay.textContent = weekInfo.weekDay;
+    icon.src = `https://openweathermap.org/img/wn/${iconSetIdentifier[weekInfo.icon]}@2x.png`;
+    rainChance.textContent = weekInfo.chanceOfRain;
+    humidity.textContent = weekInfo.humidity;
+    temperature.textContent = weekInfo.temp;
+
+    imgContainer.appendChild(icon);
+    weekItem.appendChild(weekDay);
+    weekItem.appendChild(imgContainer);
+    weekItem.appendChild(rainChance);
+    weekItem.appendChild(humidity);
+    weekItem.appendChild(temperature);
+    return weekItem;
+  }
+
+  const createWeekDisplay = (weekArray) => {
+    const display = document.querySelector('#week-temp-list');
+    console.log('hello');
+    display.textContent = '';
+    weekArray.forEach(date => {
+      console.log(date);
+      display.appendChild(createWeekItem(date));
+    });
+  }
+
   return {
     changeTodaysTemp,
     changeDescription,
     changeAdditionalInfo,
     createHourForecast,
-    createHourDisplay
+    createHourDisplay,
+    createWeekItem,
+    createWeekDisplay
   }
 })();
 
