@@ -1,3 +1,5 @@
+import location from './location';
+
 const dom = (() => {
   const iconSetIdentifier = {
     snow: '13d',
@@ -17,6 +19,8 @@ const dom = (() => {
     'clear-day': '01d',
     'clear-night': '01n'
   }
+
+  const errorMessage = document.querySelector('#error-message');
 
   const changeTodaysTemp = (values) => {
     const city = document.querySelector('#city');
@@ -127,12 +131,31 @@ const dom = (() => {
 
   const createWeekDisplay = (weekArray) => {
     const display = document.querySelector('#week-temp-list');
-    console.log('hello');
+
+    if (weekArray.length === 0) {
+      errorMessage.textContent = "This location doesn't exist";
+      setTimeout(() => {
+        errorMessage.textContent = '';
+      }, 3000);
+      return;
+    }
     display.textContent = '';
     weekArray.forEach(date => {
       console.log(date);
       display.appendChild(createWeekItem(date));
     });
+  }
+
+  const createPage = (city) => {
+    location.getLocation(city);
+    const array = location.getWeekInfo(city);
+    setTimeout(() => {
+      changeDescription(location.getDescription());
+      changeTodaysTemp(location.getTodaysTemp());
+      changeAdditionalInfo(location.getAdditionalTempInfo());
+      createHourDisplay(location.getDisplayInfo());
+      createWeekDisplay(array);
+    }, 500);
   }
 
   return {
@@ -142,7 +165,8 @@ const dom = (() => {
     createHourForecast,
     createHourDisplay,
     createWeekItem,
-    createWeekDisplay
+    createWeekDisplay,
+    createPage
   }
 })();
 

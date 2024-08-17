@@ -24,6 +24,47 @@ button {
 
 #heading {
   color: white;
+ 
+}
+
+form {
+  display: flex;
+}
+
+#input-div {
+  display: flex;
+  flex-direction: column;
+}
+
+#search {
+  width: 250px;
+  height: 26px;
+  border-radius: 3px 0 0 3px;
+  padding-left: 5px;
+  border: none;
+}
+
+#search-button {
+  border: none;
+  background-color: rgb(28, 213, 28);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+}
+
+#temp-toggle {
+  cursor: pointer;
+  border: none;
+  min-height: 26px;
+  min-width: 75px;
+  border-radius: 3px;
+  
+}
+
+#error-message {
+  font-size: 13px;
+  color: red;
 }
 
 #main-container {
@@ -56,6 +97,7 @@ button {
 
 #temp-display {
   display: flex;
+  border-top: 1px solid rgb(213, 213, 213);
   gap: 30px;
 }
 

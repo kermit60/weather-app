@@ -31,7 +31,7 @@ const location = (() => {
     const city = targetLocation.resolvedAddress.split(', ')[0];
     const today = targetLocation.days[0];
     const condition = today.conditions;
-    const currentTemp = `${Math.round(targetLocation.currentConditions.temp)}°`;
+    const currentTemp = `${Math.round(targetLocation.currentConditions ? targetLocation.currentConditions.temp : targetLocation.days[0].temp)}°`;
     const high = `H:${Math.round(today.tempmax)}°`;
     const low = `L:${Math.round(today.tempmin)}°`;
 
@@ -49,9 +49,9 @@ const location = (() => {
     const displayArray = targetLocation.days[0].hours;
     array.push({
       dateTime: 'Now',
-      chanceOfRain: `${targetLocation.currentConditions.precipprob}%`,
-      icon: targetLocation.currentConditions.icon,
-      temp: `${targetLocation.currentConditions.temp}°`
+      chanceOfRain: `${targetLocation.currentConditions ? targetLocation.currentConditions.precipprob : targetLocation.days[0].precipprob}%`,
+      icon: targetLocation.currentConditions ? targetLocation.currentConditions.icon : targetLocation.days[0].icon,
+      temp: `${targetLocation.currentConditions ? targetLocation.currentConditions.temp : targetLocation.days[0].temp}°`
     })
     displayArray.forEach(element => {
       const dateTime = element.datetime.substring(0, 5);
@@ -116,7 +116,10 @@ const location = (() => {
           infoArray.push({weekDay, icon, chanceOfRain, humidity, temp});
         })
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        return;
+      });
     console.log(infoArray);
     return infoArray;
   }

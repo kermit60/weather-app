@@ -9,11 +9,14 @@
     <div id="header">
         <h2 id="heading">Weather</h2>
         <div id="input-div">
-            <input id="search" type="text">
-            <button id="search-button">Search</button>
+            <form action="">
+                <input id="search" type="text" placeholder="Enter a city" required>
+                <button id="search-button">Search</button>
+            </form>
+            <span id="error-message"></span>
         </div>
         <button id="temp-toggle">
-            <p>C/F</p>
+            <p>°C / °F</p>
         </button>
     </div>
     
