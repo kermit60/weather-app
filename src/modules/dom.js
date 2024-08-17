@@ -133,10 +133,6 @@ const dom = (() => {
     const display = document.querySelector('#week-temp-list');
 
     if (weekArray.length === 0) {
-      errorMessage.textContent = "This location doesn't exist";
-      setTimeout(() => {
-        errorMessage.textContent = '';
-      }, 3000);
       return;
     }
     display.textContent = '';
@@ -158,6 +154,13 @@ const dom = (() => {
     }, 500);
   }
 
+  const displayErrorMessage = (city) => {
+    errorMessage.textContent = `The location (${city}) doesn't exist`;
+    setTimeout(() => {
+      errorMessage.textContent = '';
+    }, 3000);
+  }
+
   return {
     changeTodaysTemp,
     changeDescription,
@@ -166,7 +169,8 @@ const dom = (() => {
     createHourDisplay,
     createWeekItem,
     createWeekDisplay,
-    createPage
+    createPage,
+    displayErrorMessage
   }
 })();
 

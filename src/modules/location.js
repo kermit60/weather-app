@@ -1,3 +1,5 @@
+import dom from './dom';
+
 const location = (() => {
   let targetLocation = '';
   // yyyy-MM-ddTHH:mm:ss 2020-10-19T13:00:00
@@ -21,6 +23,7 @@ const location = (() => {
       targetLocation = cityInfo
       console.log(targetLocation);
     } catch (error) {
+      dom.displayErrorMessage(city);
       console.log(`The city/country ${city} doesn't exist`);
     }
   }
