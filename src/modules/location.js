@@ -71,14 +71,14 @@ const location = (() => {
     return array;
   }
 
-  const getAdditionalTempInfo = () => {
+  const getAdditionalTempInfo = (units) => {
     const today = targetLocation.days[0];
     const sunrise = today.sunrise.substring(0, 5);
     const sunset = today.sunset.substring(0, 5);
     const chanceOfRain = `${today.precipprob}%`;
     const humidity = `${Math.round(today.humidity)}%`;
     const wind = `${today.windspeed} km/hr`;
-    const feelslike =`${today.feelslike}°`;
+    const feelslike =`${units ? Math.round(today.feelslike) : Math.round((today.feelslike * 9/5) + 32)}°`;
     const precip = `${Math.round(today.precip)} mL`;
     const pressure = `${String(today.pressure).split('.')[0]} hPa`
     const visibility = `${today.visibility} km`;

@@ -148,7 +148,7 @@ const dom = (() => {
     setTimeout(() => {
       changeDescription(location.getDescription());
       changeTodaysTemp(location.getTodaysTemp(units));
-      changeAdditionalInfo(location.getAdditionalTempInfo());
+      changeAdditionalInfo(location.getAdditionalTempInfo(units));
       createHourDisplay(location.getDisplayInfo(units));
       createWeekDisplay(array);
     }, 500);
